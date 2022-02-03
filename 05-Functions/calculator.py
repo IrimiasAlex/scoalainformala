@@ -1,53 +1,48 @@
-# 2 variabile
+# 2 variabila
 # 1 operator
 # 1 rezultat
 
-def suma(a: int, b: int) -> int:
-    return a + b
+def suma(a: int, b: int) -> str:
+    return f"{a} + {b} = {a + b}"
 
-def diferenta(a: int, b: int) -> int:
-    return a - b
 
-def inmultire(a: int, b: int) -> int:
-    return a * b
+def diferenta(a: int, b: int) -> str:
+    return f"{a} - {b} = {a - b}"
 
-def impartire(a: int, b: int) -> float:
+
+def inmultire(a: int, b: int) -> str:
+    return f"{a} * {b} = {a * b}"
+
+
+def impartire(a: int, b: int) -> str:
     if b == 0:
         while b == 0:
-            b = int(input("Aloca o alta valoare pentru b: "))
-    return a / b
+            b = int(input("Aloca o noua valoare pentru b: "))
+    if a % b == 0:
+        c = int(a / b)
+    else:
+        c = float(a / b)
+    return f"{a} / {b} = {c}"
 
-def operator():
+
+def operator() -> str:
     op = input("Alege operatorul: ")
     if op not in ['*', '/', '+', '-']:
         while op not in ['*', '/', '+', '-']:
-            op =  input("Alege operatorul")
+            op = input("Alege operatorul: ")
     return op
 
+
 def conversie(mesaj_input: str):
-    nr1 = input(f"{mesaj_input}")
-    while nr1.isdigit() is False:
-        nr1 = input(f"{mesaj_input} ")
-    return int(nr1)
-
-    nr2 = input(f"{mesaj_input}")
-    while nr2.isdigit() is False:
-        nr2 = input(f"{mesaj_input} ")
-    nr2 = int(nr2)
-
+    nr = input(f"{mesaj_input}")
+    while nr.isdigit() is False:
+        nr = input(f"{mesaj_input}")
+    return int(nr)
 
 
 def calculator():
-    # nr1 = input(f"{mesaj_input}")
-    # while nr1.isdigit() is False:
-    #     nr1 = input(f"{mesaj_input} ")
-    # nr1 = int(nr1)
     nr1 = conversie("Primul numar: ")
-    nr2 = conversie("Al 2-lea numar: ")
-    # nr2 = int(input("Al 2-lea numar:"))
-    # while nr2.isdigit() is False:
-    #     nr2 = input("Al doilea numar: ")
-    # nr2 = int(nr2)
+    nr2 = conversie("Al doilea numar: ")
     op = operator()
     if op == '+':
         rezultat = suma(nr1, nr2)
@@ -58,5 +53,7 @@ def calculator():
     else:
         rezultat = impartire(nr1, nr2)
     return rezultat
-print(calculator())
+    # return f"{nr1} {op} {nr2} = ",  eval(f"{nr1} {op} {nr2}")
 
+
+print(calculator())
