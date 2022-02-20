@@ -1,54 +1,138 @@
-import random
-choice_list = ["jucator", 'robot']
-def verificare_castigator(tabla):
-    if tabla[1] == tabla[2] == tabla[3] is not None or tabla[4] == tabla[5] == tabla[6] is not None or tabla[7] == tabla[8] == tabla[9] is not None or\
-            tabla[1] == tabla[4] == tabla[7] is not None or tabla[8] == tabla[5] == tabla[2] is not None or tabla[9] == tabla[6] == tabla[3] is not None or\
-            tabla[1] == tabla[5] == tabla[9] is not None or tabla[7] == tabla[5] == tabla[3]:
-        print('Ai castigat')
-def alegere_calculator(a, b):
-    # Incercam 5
-    if a[5] is None:
-        a[5] = b
-    elif a[1] is None or a[3] is None or a[7] is None or a[9] is None:
-        if a[1] is None:
-            a[1] = b
-        elif a[3] is None:
-            a[3] = b
-        elif a[7] is None:
-            a[7] = b
+tabla = ['_', '_', '_',
+         '_', '_', '_',
+         '_', '_', '_']
+jucator = 'X'
+calculator = '0'
+castigator = None
+continuam_jocul = True
+
+
+# game tabla
+def afisare_tabla(tabla):
+    print(tabla[0] + "   " + tabla[1] + "   " + tabla[2])
+    print("         ")
+    print(tabla[3] + "   " + tabla[4] + "   " + tabla[5])
+    print("         ")
+    print(tabla[6] + "   " + tabla[7] + "   " + tabla[8])
+
+
+# take player input
+def alegere_jucator(tabla):
+        alegere = int(input("Alege unde vrei sa pui X-ul: "))
+        if tabla[alegere - 1] == '_':
+            tabla[alegere - 1] = jucator
         else:
-            a[9] = b
+            print("Este deja ocupata :(, alege alta: ")
+
+
+# check for win or tie
+def castig_linie(tabla):
+    global castigator
+    if tabla[0] == tabla[1] == tabla[2] and tabla[0] != "_":
+        castigator = tabla[0]
+        return True
+    elif tabla[3] == tabla[4] == tabla[5] and tabla[3] != "_":
+        castigator = tabla[3]
+        return True
+    elif tabla[6] == tabla[7] == tabla[8] and tabla[6] != "_":
+        castigator = tabla[6]
+        return True
+
+
+def castig_coloana(tabla):
+    global castigator
+    if tabla[0] == tabla[3] == tabla[6] and tabla[0] != "_":
+        castigator = tabla[0]
+        return True
+    elif tabla[1] == tabla[4] == tabla[7] and tabla[1] != "_":
+        castigator = tabla[1]
+        return True
+    elif tabla[2] == tabla[5] == tabla[8] and tabla[2] != "_":
+        castigator = tabla[3]
+        return True
+
+
+def castig_diagonala(tabla):
+    global castigator
+    if tabla[0] == tabla[4] == tabla[8] and tabla[0] != "_":
+        castigator = tabla[0]
+        return True
+    elif tabla[2] == tabla[4] == tabla[6] and tabla[4] != "_":
+        castigator = tabla[2]
+        return True
+
+
+def ai_castigat(tabla):
+    global continuam_jocul
+    if castig_linie(tabla):
+        afisare_tabla(tabla)
+        print(f"Castigatorul este: {castigator}!")
+        continuam_jocul = False
+
+    elif castig_coloana(tabla):
+        afisare_tabla(tabla)
+        print(f"Castigatorul este: {castigator}!")
+        continuam_jocul = False
+
+    elif castig_diagonala(tabla):
+        afisare_tabla(tabla)
+        print(f"Castigatorul este: {castigator}!")
+        continuam_jocul = False
+
+
+def egalitate(tabla):
+    global continuam_jocul
+    if "_" not in tabla:
+        afisare_tabla(tabla)
+        print("Egalitate!")
+        continuam_jocul = False
+
+
+# switch player
+def schimba_jucatorul():
+    global jucator
+    if jucator == "X":
+        jucator = "O"
     else:
-        if a[2] is None:
-            a[2] = b
-        elif a[4] is None:
-            a[4] = b
-        elif a[6] is None:
-            a[6] = b
-        else:
-            a[8] = b
-    return a
+        jucator = "X"
 
 
-jucator = None
-simbol_jucator = '0'
-simbol_robot = 'x'
-if random.choice(choice_list) == 'jucator':
-    jucator = input('Alege valoarea:')
-    simbol_robot = "0"
-    simbol_jucator = "x"
-tabla = {1: None, 2: None, 3: None,\
-         4: None, 5: None, 6: None,\
-         7: None, 8: None, 9: None}
-print(tabla.values())
-while None in list(tabla.values()):
-    if jucator is None:
-        jucator = input("Alege alta valoare: ")
-    if tabla[int(jucator)] is None:
-        tabla[int(jucator)] = simbol_jucator
-    # verificare daca utilizatorul a castigat
-    verificare_castigator(tabla)
-    alegere_calculator(tabla, simbol_robot)
-    # verificare daca calculatorul a castigat
-    verificare_castigator(tabla)
-    print(tabla)
+def calculator(tabla):
+    while jucator == "O":
+        if tabla[4] == '_':
+            tabla[4] = '0'
+            schimba_jucatorul()
+        elif tabla[0] == '_':
+            tabla[0] = '0'
+            schimba_jucatorul()
+        elif tabla[2] == '_':
+            tabla[2] = '0'
+            schimba_jucatorul()
+        elif tabla[6] == '_':
+            tabla[6] = '0'
+            schimba_jucatorul()
+        elif tabla[8] == '_':
+            tabla[8] = '0'
+            schimba_jucatorul()
+        elif tabla[1] == '_':
+            tabla[1] = '0'
+            schimba_jucatorul()
+        elif tabla[3] == '_':
+            tabla[3] = '0'
+            schimba_jucatorul()
+        elif tabla[5] == '_':
+            tabla[5] = '0'
+            schimba_jucatorul()
+        elif tabla[7] == '_':
+            tabla[7] = '0'
+            schimba_jucatorul()
+
+while continuam_jocul:
+    print(afisare_tabla(tabla))
+    alegere_jucator(tabla)
+    ai_castigat(tabla)
+    egalitate(tabla)
+    schimba_jucatorul()
+    calculator(tabla)
+    ai_castigat(tabla)
+    egalitate(tabla)
