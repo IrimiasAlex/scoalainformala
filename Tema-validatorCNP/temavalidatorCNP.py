@@ -76,7 +76,7 @@ NNN()
 
 
 def C():
-    codul_dvs = input("Introduceti-va  primele 12 cifre ale CNP-ul dvs separate prin spatii :")
+    codul_dvs = input("Introduceti-va  primele 12 cifre ale CNP-ul dvs separate prin spatii: ")
     lista_utilizator = codul_dvs.split()
     while len(lista_utilizator) != 12:
         print("Ati tastat gresit.")
@@ -88,7 +88,7 @@ def C():
         2 * lista_utilizator[0] + 7 * lista_utilizator[1] + 9 * lista_utilizator[2] + 1 * lista_utilizator[3] +
         4 * lista_utilizator[4] + 6 * lista_utilizator[5] + 3 * lista_utilizator[6] + 5 * lista_utilizator[7] +
         8 * lista_utilizator[8] + 2 * lista_utilizator[9] + 7 * lista_utilizator[10] + 9 * lista_utilizator[11]) % 11
-    print(f'Cifra dvs. de control este: {noua_lista}')  #---> aici imi afiseaza cfra de control ( ultima din CNP)
+    # print(f'Cifra dvs. de control este: {noua_lista}')  ---> aici imi afiseaza cfra de control ( ultima din CNP)
     cod_numeric.insert(6, str(noua_lista))
 C()
 
