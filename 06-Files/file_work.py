@@ -26,3 +26,4 @@
 # with open("fisier2.txt", "r") as file:
 #     for line in list(file):
 #         print('line', line)
+
