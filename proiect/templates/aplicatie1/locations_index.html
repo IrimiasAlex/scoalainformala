@@ -51,9 +51,9 @@
     {% endif %}
     {% endfor %}
     {% if page_obj.has_next %}
-        <li><a class="btn" href="?page={{ page_obj.next_page_number }}">>></a></li>
+    <li><a class="btn" href="?page={{ page_obj.next_page_number }}">>></a></li>
     {% else %}
-        <li class="disabled btn"><span>>></span></li>
+    <li class="disabled btn"><span>>></span></li>
     {% endif %}
     <span class="align-right">Showing {{ page_obj.start_index }} - {{ page_obj.end_index }} of {{ page_obj.paginator.count }}</span>
 
