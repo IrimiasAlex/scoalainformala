@@ -36,65 +36,66 @@
 class Catalog:
 
     def __init__(self, nume, prenume):
-        self.nume = nume
-        self.prenume = prenume
-        self.absente = 0
+        self.name = nume
+        self.firstname = prenume
         self.materii = {}
+        self.absente = 0
+
+    def incrementare_abs(self, nr_abs):
+        self.absente += nr_abs
+
+    def delete_abs(self, nr_abs):
+        if self.absente >= nr_abs:
+            self.absente -= nr_abs
 
     def __str__(self):
-        return f'{self.nume} {self.prenume} \n \t materii si note: {self.materii} \n \t absente: {self.absente}'
-
-    def increment_abs(self):
-        self.absente += 1
-
-    def delete_abs(self, numar_abs):
-        if self.absente > numar_abs:
-            self.absente -= numar_abs
+        return f'Elevul {self.name} {self.firstname} are {self.absente} absente'
 
 
 class Extensie1(Catalog):
 
     def __init__(self, nume, prenume):
         super().__init__(nume, prenume)
+        self.note_finale = {}
 
-    def add_subject(self, materie, note):
-        self.materii.update({materie : note})
+    def metoda_1(self, materie, note):
+        self.materii.update({materie: note})
 
-    def print_all(self):
-        return f'Toate materiile sunt {self.materii.keys()}'
+    def metoda_2(self):
+        return f"Materiile elevului {self.name} {self.firstname} sunt: {', '.join(list(self.materii.keys()))}"
 
-    def final_grade(self):
+    def metoda_3(self):
         note_finale = {}
         for i, j in self.materii.items():
             if all(isinstance(x, int) for x in j):
-                medie = sum(j) / len(j)
-                note_finale.update({i : medie})
-        return note_finale
+                media = sum(j) / len(j)
+                note_finale.update({i: media})
+        return f'Notele finale ale studentului {self.name} {self.firstname} sunt: {("%s" % note_finale).replace("{", "").replace("}", "")}'
 
 
-
-
-student = Catalog('Roata', 'Ion')
-print(student)
-student.increment_abs()
-student.increment_abs()
-student.increment_abs()
-print(student)
+student = Catalog('Ion', 'Roata')
+student.incrementare_abs(3)
 student.delete_abs(2)
-print(student)
 
-student2 = Catalog('Cerc', 'George')
-student2.increment_abs()
-student2.increment_abs()
-student2.increment_abs()
-student2.increment_abs()
+student1 = Extensie1('Ion', 'Roata')
+student1.metoda_1('Python', [4, 5, 6])
+student1.metoda_1('Romana', [1, 9, 10])
+
+student2 = Catalog('George', 'Cerc')
+student2.incrementare_abs(4)
 student2.delete_abs(2)
-print(student2)
 
-obj = Extensie1('Ana', 'Maria')
-obj.add_subject('Python', [5, 7, 9])
-obj.add_subject('Java', [3, 7, 9])
-print(obj.final_grade())
+student3 = Extensie1('George', 'Cerc')
+student3.metoda_1('Python', [7, 8, 9])
+student3.metoda_1('Matematica', [2, 8, 5])
+
+print(student)
+print(student1.metoda_2())
+print(student1.metoda_3())
+
+print(student2)
+print(student3.metoda_2())
+print(student3.metoda_3())
 
 
 #PROBLEMA-URMATOARE :
