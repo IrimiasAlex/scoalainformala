@@ -31,11 +31,6 @@ def cautare(request):
 
 def podcast_detail_view(request, pk):
     podcast = get_object_or_404(Podcasts, id=pk)
-    #in loc de
-    # try:
-    #     podcast = Podcasts.objects.get(id=pk)
-    # except Podcasts.DoesNotExist:
-    #     raise Http404("Nu s-a gasit....")
     return render(request, 'site_podcast/displayphoto.html', context={'podcast': podcast})
 
 
