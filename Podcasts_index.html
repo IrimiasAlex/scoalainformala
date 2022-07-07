@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% if request.user.is_authenticated %}
+<body style="background-color:#DAF7A6">
+<div class="text-center">
+    <a class="flex z-20 bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-100 h-16 items-center shadow-strong"></a>
+    <a class="btn btn-info" href="{% url 'podcasturi:listare' %}" width="180">Podcasturi Romane&#351;ti</a>
+    </div>
+    </body>
+
+    <table class="table">
+        <thead style="background-color:#FFFFF0">
+        <tr>
+            <th><a class="btn btn-primary" href="{% url 'podcasturi:listare' %}">Podcasturi</a></th>
+            <th>
+                <form class="d-flex" method=POST ACTION="{% url 'podcasturi:cautare' %}">
+                    {% csrf_token %}
+                    <input class="form-control" type="search" placeholder="C&#259utare" aria-label="Search"
+                           name="cautat">
+                    <button class="btn btn-outline-secondary" type="submit"> Caut&#259</button>
+                </form>
+            </th>
+            <th>
+                <form class="d-flex" method=POST ACTION="{% url 'podcasturi:categories' %}">
+                    {% csrf_token %}
+                    <input class="form-control" type="search" placeholder="Caut&#259 dup&#259 categorie" aria-label="Search"
+                           name="categorii" >
+                     <button class="btn btn-outline-secondary" type="submit"> Categorii</button>
+                </form>
+            </th>
+            <th><a class="btn btn-success" href="{% url 'logout' %}">Autentificare</a></th>
+            <div align="right">
+            <span class="">Esti logat cu username-ul {{ request.user.username }}</span>
+            </div>
+
+            <th><a class="btn btn-danger" href="{% url 'logout' %}">Deconecta&#355;i-v&#259;</a></th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <body>
+    <div class="content w-full pt-16 px-4 sm:px-2">
+        <div class="row">
+            {% for a in podcasts %}
+            <div class="flex w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+                <div class="flex-grow rounded overflow-hidden shadow-xl m-4 hover:shadow-round cursor-pointer">
+                    <a href="{% url 'podcasturi:displayphoto' a.id %} ">
+                        <img class="btn" width="200" src="{{ a.profile_pic.url }}">
+                        <br>{{ a.podcasts }}
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    </body>
+    {% endif %}
+    {% endblock %}
+</div>
