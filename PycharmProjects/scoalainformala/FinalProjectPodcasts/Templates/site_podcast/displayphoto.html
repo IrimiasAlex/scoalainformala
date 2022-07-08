@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% if request.user.is_authenticated %}
+<body style="background-color:#DAF7A6">
+<div class="text-center">
+    <a class="flex z-20 bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-100 h-16 items-center shadow-strong"></a>
+    <a class="btn btn-info" href="{% url 'podcasturi:listare' %}" width="180">Podcasturi Romane&#351;ti</a>
+</div>
+</body>
+
+
+<table class="table">
+    <thead style="background-color:#FFFFF0">
+    <tr>
+        <th><a class="btn btn-primary" href="{% url 'podcasturi:listare' %}">Podcasturi</a></th>
+        <th>
+            <form class="d-flex" method=POST ACTION="{% url 'podcasturi:cautare' %}">
+                {% csrf_token %}
+                <input class="form-control" type="search" placeholder="C&#259utare" aria-label="Search"
+                       name="cautat">
+                <button class="btn btn-outline-secondary" type="submit"> Caut&#259</button>
+            </form>
+        </th>
+        <th>
+            <form class="d-flex" method=POST ACTION="{% url 'podcasturi:categories' %}">
+                {% csrf_token %}
+                <input class="form-control" type="search" placeholder="Caut&#259 dup&#259 categorie" aria-label="Search"
+                       name="categorii">
+                <button class="btn btn-outline-secondary" type="submit"> Categorii</button>
+            </form>
+        </th>
+        <th><a class="btn btn-success" href="{% url 'logout' %}">Autentificare</a></th>
+        <div align="right">
+            <span class="">Esti logat cu username-ul {{ request.user.username }}</span>
+        </div>
+
+        <th><a class="btn btn-danger" href="{% url 'logout' %}">Deconecta&#355;i-v&#259;</a></th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+{% endif %}
+<body style="background-color:powderblue;">
+<div class="row">
+    <center>
+    {{ podcast.description }}
+        </center>
+</div>
+<div class="row">
+    <img class="btn" width="200" src="{{ podcast.profile_pic.url }}">
+</div>
+<br>Asculta podcasturile aici: <a href="{{ podcast.web }}"
+                                  title="Website" class="mx-3">
+
+    <svg viewBox="0 0 24 24" style="width: 24px; height: 24px;">
+        <path fill="currentColor"
+              d="M10.59,13.41C11,13.8 11,14.44 10.59,14.83C10.2,15.22 9.56,15.22 9.17,14.83C7.22,12.88 7.22,9.71 9.17,7.76V7.76L12.71,4.22C14.66,2.27 17.83,2.27 19.78,4.22C21.73,6.17 21.73,9.34 19.78,11.29L18.29,12.78C18.3,11.96 18.17,11.14 17.89,10.36L18.36,9.88C19.54,8.71 19.54,6.81 18.36,5.64C17.19,4.46 15.29,4.46 14.12,5.64L10.59,9.17C9.41,10.34 9.41,12.24 10.59,13.41M13.41,9.17C13.8,8.78 14.44,8.78 14.83,9.17C16.78,11.12 16.78,14.29 14.83,16.24V16.24L11.29,19.78C9.34,21.73 6.17,21.73 4.22,19.78C2.27,17.83 2.27,14.66 4.22,12.71L5.71,11.22C5.7,12.04 5.83,12.86 6.11,13.65L5.64,14.12C4.46,15.29 4.46,17.19 5.64,18.36C6.81,19.54 8.71,19.54 9.88,18.36L13.41,14.83C14.59,13.66 14.59,11.76 13.41,10.59C13,10.2 13,9.56 13.41,9.17Z"></path>
+    </svg>
+</a>
+</body>
+{% endblock %}
+
+
