@@ -1,6 +1,7 @@
-from menu import Menu, MenuItem
+from menu import Menu
 from coffee_maker import CoffeeMaker
 from money_machine import MoneyMachine
+
 
 money_machine = MoneyMachine()  # TODO - am creat obiectul pentru a accesa .report() din Clasa MoneyMachine(): imi returneaza Money: $value
 coffee_maker = CoffeeMaker()  ##TODO - am creat obiectul pentru a accesa .report() din Clasa CoffeeMaker(): imi returneaza Water: 300ml, Milk: 200ml, Coffee: 100g(aici, valoriile by default)
@@ -20,4 +21,5 @@ while do_we_have_that_drink:
         drink = menu.find_drink(choice)
         if coffee_maker.is_resource_sufficient(drink) and money_machine.make_payment(drink.cost):
             coffee_maker.make_coffee(drink)
+
 
